@@ -24,12 +24,17 @@ def transform_weather_data(weather_data):
         transformed_data[issue_date] = weather_description
     return transformed_data
 
-# Main function to get weather forecast for a city and print JSON output
+# Main function to get weather forecast for a city and save JSON output to a file
 def main():
     location_id = '1174872'  # Karachi's location ID
     weather_data = get_weather_forecast(location_id)
     transformed_data = transform_weather_data(weather_data)
-    print(json.dumps(transformed_data, indent=4))
+    
+    # Save the transformed data to a JSON file
+    with open('karachi_weather_forecast.json', 'w') as json_file:
+        json.dump(transformed_data, json_file, indent=4)
+    
+    print("Weather forecast data saved to karachi_weather_forecast.json")
 
 if __name__ == '__main__':
     main()
